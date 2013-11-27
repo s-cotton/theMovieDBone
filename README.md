@@ -1,8 +1,10 @@
 MovieBoneDB
+===========
 
 Backbone Model that connects to theMovieDB API v3
 
 Usage:
+------
 
 ```javascript
 var theMovieDb = new theMovieDbApiModel({
@@ -16,8 +18,21 @@ theMovieDb.getSimilarMovies(movieId,{
 },function(xhr,textStatus,errorThrown){
 	//Error!!
 });
+
+theMovieDb.getAllMovieChanges({
+	page: 2,
+	start_date: 'YYYY-MM-DD',
+	end_date: 'YYYY-MM-DD'
+},function(data){
+	//Success!!
+},function(xhr,textStatus,errorThrown){
+	//Error!!
+});
+
 ```
+
 Todo:
+-----
 
 - [x] Initial Request Structure
 - [x] Get Requests
