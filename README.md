@@ -1,7 +1,7 @@
-MovieBoneDB
-===========
+theMovieDBone
+=============
 
-Backbone Model that connects to theMovieDB API v3
+Backbone Model that interacts with theMovieDB API v3
 
 Usage:
 ------
