@@ -1,5 +1,7 @@
 var theMovieDbApiModel = Backbone.Model.extend({
 
+	base_url: 'http://api.themoviedb.org/3/',
+
 	defaults: {
 		apikey: '',
 		lang: "en"
@@ -19,7 +21,7 @@ var theMovieDbApiModel = Backbone.Model.extend({
 	request: function(url,data,type,success_cb,error_cb){
 		var _this = this;
 
-		if( _.isUndefined(error_cb) 	|| _.isNull(error_cb) ){
+		if( _.isUndefined(error_cb) || _.isNull(error_cb) ){
 			var error_cb = function( jqXHR, textStatus, errorThrown ){ 
 				_this.trigger('error', { 
 					jqXHR: jqXHR, 
@@ -28,17 +30,19 @@ var theMovieDbApiModel = Backbone.Model.extend({
 				}); 
 			}
 		}
-		if( _.isUndefined(success_cb) 	|| _.isNull(success_cb) ){
+
+		if( _.isUndefined(success_cb) || _.isNull(success_cb) ){
 			var success_cb = function(data){ 
 				_this.trigger('request',data); 
 			};
 		}
-		if( _.isUndefined(data) 		|| _.isNull(data) ) 		var data = {};
 
-		if( url.indexOf('://') < 0) var url = 'http://api.themoviedb.org/3/'+url;
+		if( _.isUndefined(data) || _.isNull(data) ) var data = {};
+
+		if( url.indexOf('://') < 0) var url = this.base_url+url;
 
 		if( ! data.hasOwnProperty('api_key') ) data.api_key = _this.get("apikey");
-		if( ! data.hasOwnProperty('language') ) data.language = _this.get("language");
+		if( ! data.hasOwnProperty('language') ) data.language = _this.get("lang");
 
 		$.ajax({
 			url: url,
